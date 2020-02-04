@@ -50,7 +50,8 @@ public class Main{
         
         panel.add(control,BorderLayout.NORTH);
         
-        Display display = new Display();
+        TempGame tempGame = new TempGame();
+        Display display = new Display(tempGame);
         panel.add(display, BorderLayout.CENTER);
         frame.add(panel);
         
