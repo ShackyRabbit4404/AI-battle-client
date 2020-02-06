@@ -1,29 +1,50 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-public class Display extends JComponent{
+public class Display extends JPanel{
     Game game;
     int screenWidth;
     int screenHeight;
     ArrayList<Image> textures;
+    ArrayList<Round> rounds;
+    int[][] map;
+    int[][] players;
     public Display(Game g){
         super();
         game = g;
         textures = game.getTextures();
-        
         System.out.println("Width: "+screenWidth+" Height: "+screenHeight);
     }
     public void draw(){
-        super.repaint();
+        this.repaint();
+    }
+    boolean temp = true;
+    public void setRounds(ArrayList<Round> rds){
+        rounds = rds;
+        System.out.println("Set the rounds: "+rds.size());
+        for(Round r: rounds ){
+            System.out.println(temp);
+            map = r.getMap();
+            players = r.getPlayers();
+            draw();
+            try{
+                Thread.sleep(200);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        temp = false;
     }
     public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        if(temp){
+            System.out.println("Should be drawing map");
+        }
         screenWidth = this.getSize().width;
         screenHeight = this.getSize().height;
-        super.paintComponent(g);
-        int map[][] = game.getMap();
         int mapWidth = game.getMapWidth();
         int mapHeight = game.getMapHeight();
-        int[][] players = game.getChars();
         double scaledWidth = screenWidth/mapWidth;
         double scaledHeight = screenHeight/mapHeight;
         if(map != null){

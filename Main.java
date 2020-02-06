@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 public class Main{
     public static void main(String[] args){
         JFrame frame = new JFrame("AI Battle Client");
@@ -7,6 +9,8 @@ public class Main{
         frame.setBounds(0,0,screenSize.width,screenSize.height);
         JPanel panel = new JPanel(new BorderLayout());
         String[] ais = new String[]{"Bob","Jeff","Steve","Martin"};
+        
+        ArrayList<Round> rounds = new ArrayList<Round>();
         
         JPanel control = new JPanel();
         control.setBackground(Color.GRAY);
@@ -42,12 +46,13 @@ public class Main{
         row5.add(run);
         row5.setBackground(Color.WHITE);
         
+        
+        
         control.add(row1);
         control.add(row2);
         control.add(row3);
         control.add(row4);
         control.add(row5);
-        
         panel.add(control,BorderLayout.NORTH);
         
         TempGame tempGame = new TempGame();
@@ -55,8 +60,36 @@ public class Main{
         panel.add(display, BorderLayout.CENTER);
         frame.add(panel);
         
+        run.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent event) {
+                simulate(rounds,tempGame);
+                System.out.println("Should be displaying now");
+                display.setRounds(rounds);
+                System.out.println("Should have finished displaying now");
+            } 
+        });
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel.setVisible(true);
-        frame.show();
+        frame.setVisible(true);
+    }
+    public static void displayMatch(Display d,ArrayList<Round> rds){
+        for(Round r: rds){
+            d.draw();
+            try{
+                Thread.sleep(500);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    public static void simulate(ArrayList<Round> rds, Game g){
+        while(!g.isOver()){
+            rds.add(new Round(g.getMap(),g.getChars()));
+            g.runRound();
+        }
+        rds.add(new Round(g.getMap(),g.getChars()));
     }
 }

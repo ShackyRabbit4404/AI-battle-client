@@ -10,4 +10,5 @@ public interface Game{
     public int getMapHeight();
     public ArrayList<Image> getTextures();
     public void runRound();
+    public boolean isOver();
 }

@@ -4,10 +4,14 @@ public class TempGame implements Game{
     int mapW;
     int mapH;
     int[][] map;
+    boolean gameOngoing;
+    int count;
     public TempGame(){
         mapW = 30;
         mapH = 20;
+        gameOngoing = true;
         map = new int[mapW*mapH][3];
+        count = 0;
         for(int i = 0; i < map.length;i++){
             map[i][0] = i%mapW;
             map[i][1] = (int)(i/mapW);
@@ -18,6 +22,9 @@ public class TempGame implements Game{
                 map[i][2] = 1;
             }
         }
+    }
+    public boolean isOver(){
+        return !gameOngoing;
     }
     public int[][] getMap(){
         return map;
@@ -32,7 +39,10 @@ public class TempGame implements Game{
         return mapH;
     }
     public void runRound(){
-        
+        System.out.println("Running round");
+        count++;
+        if(count == 20)
+            gameOngoing = false;
     }
     public ArrayList<Image> getTextures(){
         Toolkit tool = Toolkit.getDefaultToolkit();  
