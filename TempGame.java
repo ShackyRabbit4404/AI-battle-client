@@ -12,6 +12,9 @@ public class TempGame implements Game{
         gameOngoing = true;
         map = new int[mapW*mapH][3];
         count = 0;
+        randomizeMap();
+    }
+    public void randomizeMap(){
         for(int i = 0; i < map.length;i++){
             map[i][0] = i%mapW;
             map[i][1] = (int)(i/mapW);
@@ -43,6 +46,7 @@ public class TempGame implements Game{
         count++;
         if(count == 20)
             gameOngoing = false;
+        randomizeMap();
     }
     public ArrayList<Image> getTextures(){
         Toolkit tool = Toolkit.getDefaultToolkit();  

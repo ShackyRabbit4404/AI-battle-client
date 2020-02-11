@@ -53,12 +53,12 @@ public class Main{
         control.add(row3);
         control.add(row4);
         control.add(row5);
-        panel.add(control,BorderLayout.NORTH);
+        //panel.add(control,BorderLayout.NORTH);
         
         TempGame tempGame = new TempGame();
         Display display = new Display(tempGame);
-        panel.add(display, BorderLayout.CENTER);
-        frame.add(panel);
+        //panel.add(display, BorderLayout.CENTER);
+        //frame.add(panel);
         
         run.addActionListener(new ActionListener() 
         {
@@ -69,10 +69,13 @@ public class Main{
                 System.out.println("Should have finished displaying now");
             } 
         });
-        
+        frame.add(display);
+        //frame.add(control,BorderLayout.NORTH);
+        //frame.add(display,BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel.setVisible(true);
         frame.setVisible(true);
+        simulate(rounds,tempGame);
+        display.setRounds(rounds);
     }
     public static void displayMatch(Display d,ArrayList<Round> rds){
         for(Round r: rds){

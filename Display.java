@@ -26,7 +26,9 @@ public class Display extends JPanel{
             System.out.println(temp);
             map = r.getMap();
             players = r.getPlayers();
-            draw();
+            this.repaint();
+            System.out.println("Width: "+this.getSize().getWidth());
+            System.out.println("Height: "+this.getSize().getHeight());
             try{
                 Thread.sleep(200);
             }
