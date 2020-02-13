@@ -3,33 +3,31 @@ import java.util.*;
 public class TempGame implements Game{
     int mapW;
     int mapH;
-    int[][] map;
+    int[] map;
     boolean gameOngoing;
     int count;
     public TempGame(){
         mapW = 30;
         mapH = 20;
         gameOngoing = true;
-        map = new int[mapW*mapH][3];
+        map = new int[mapW*mapH];
         count = 0;
         randomizeMap();
     }
     public void randomizeMap(){
         for(int i = 0; i < map.length;i++){
-            map[i][0] = i%mapW;
-            map[i][1] = (int)(i/mapW);
             if(Math.random() <= 0.5){
-                map[i][2] = 0;
+                map[i] = 0;
             }
             else{
-                map[i][2] = 1;
+                map[i] = 1;
             }
         }
     }
     public boolean isOver(){
         return !gameOngoing;
     }
-    public int[][] getMap(){
+    public int[] getMap(){
         return map;
     }
     public int[][] getChars(){
@@ -42,7 +40,6 @@ public class TempGame implements Game{
         return mapH;
     }
     public void runRound(){
-        System.out.println("Running round");
         count++;
         if(count == 20)
             gameOngoing = false;

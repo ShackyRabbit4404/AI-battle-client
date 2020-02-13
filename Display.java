@@ -7,7 +7,7 @@ public class Display extends JPanel{
     int screenHeight;
     ArrayList<Image> textures;
     ArrayList<Round> rounds;
-    int[][] map;
+    int[] map;
     int[][] players;
     public Display(Game g){
         super();
@@ -50,8 +50,8 @@ public class Display extends JPanel{
         double scaledWidth = screenWidth/mapWidth;
         double scaledHeight = screenHeight/mapHeight;
         if(map != null){
-            for(int[] block: map){
-                g.drawImage(textures.get(block[2]),(int)(block[0]*scaledWidth),(int)(block[1]*scaledHeight),this);
+            for(int block: map){
+                g.drawImage(textures.get(block),(int)(block*scaledWidth),(int)(block*scaledHeight),this);
             }
         }
         else{
